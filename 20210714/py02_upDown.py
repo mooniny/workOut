@@ -39,16 +39,16 @@ for t in range(1, 1000):
 
 
 # 컴퓨터가 랜덤한 숫자를 하나 생각
-n = randint(1, 1000)
-print(n)
+# n = randint(1, 1000)
+# print(n)
 
-t = 0
+# t = 0
 # 무한 반복
-while True:
+# while True:
     # 반복 횟 수
-    t += 1
+    # t += 1
     # 답 제출하기
-    g = int(input("guess number : "))
+    # g = int(input("guess number : "))
     
     # if n == g:              => 프로그램 1글자 덜 씀
         # print("Correct!")
