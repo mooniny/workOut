@@ -5,10 +5,11 @@ from http.client import HTTPSConnection
 from bson.json_util import loads
 from sklearn.preprocessing._data import MinMaxScaler
 
-airconDF = pd.read_csv("C:\\Users\\llaum\\Desktop\\owmWeather/owmWeather.csv", name=['Year','Month','Day','Hour','Minute','Weather','Temp','Humi','Power'])
+airconDF = pd.read_csv("C:\\Users\\sdedu\\Desktop\\test\\owmWeather/owmWeather.csv", names=['Year','Month','Day','Hour','Minute','Weather','Temp','Humi','Power'])
 
 trainData = airconDF[['Temp','Humi']].to_numpy()
-label = airconDF['Air condition']
+label = airconDF['Power']
+print(airconDF)
 
 mms = MinMaxScaler()        # 20210706; 정규화
 trainData = mms.fit_transform(trainData)
@@ -32,6 +33,7 @@ what = mms.transform(what)
 result = knc.predict(what)
 print(t)
 print(h)
+print(result)
 print(result[0])
 
 import matplotlib.pyplot as plt
@@ -41,5 +43,5 @@ import seaborn as sns
 fontFile = "C:/Users/sdedu/Desktop/test/malgun.ttf"
 fontName = fm.FontProperties(fname=fontFile, size=20).get_name()
 plt.rc("font", family=fontName)
-sns.scatterplot(x="temp", y = "humi", hue = "Air_con", data=airconDF)
+sns.scatterplot(x="Temp", y = "Humi", hue = "Power", data=airconDF)
 plt.show()

@@ -36,7 +36,7 @@ sik = a * x + b
 # 기존 y값, sik을 통해 찾은 값의 오차가 적으면 a, b를 잘 찾은거
 
 # 기존 y값, sik을 통해 찾은 값의 거리, 1차원으로 줄이고, 평균
-dist = tf.reduce_mean(tf.square(y - sik))  # dist값을 줄여나가기
+dist = tf.reduce_mean(tf.square(y - sik))  # dist값을 줄여나가기 피타고라스 쓰려고 루트씌움
 
 # 최적의 a,b를 찾아줄 객체
 # learning_rate가 크면 a, b값을 크게 바꿔서 재시도 (1.123 -> 5.123 -> 9.123 -> 13.123 -> 9.5 -> 12.12)
