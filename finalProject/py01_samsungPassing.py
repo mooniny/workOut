@@ -1,5 +1,5 @@
 # -*- coding:utf-8 -*-
-from http.client import HTTPConnection, HTTPSConnection
+from http.client import HTTPSConnection
 from bs4 import BeautifulSoup
 
 # https://finance.naver.com/item/news_news.nhn?code=005930&page=2
@@ -21,7 +21,7 @@ for page in range(1, 5):
         # # print(n.select("a"))
         # # print(type(n.select("a")))
         # print(n.select("a")[0].attrs["href"])
-        # print(n.text.strip())
+        print(n.text.strip())
         # # print(type(n.text.strip()))
         # print('------------')
         

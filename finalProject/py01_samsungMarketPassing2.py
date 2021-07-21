@@ -2,14 +2,14 @@
 from http.client import HTTPSConnection
 from bs4 import BeautifulSoup
 
-# https://finance.naver.com/item/sise_day.nhn?code=005930&page=2
+# https://vip.mk.co.kr/newSt/price/daily.php?p_page=3&y1=2021&m1=02&d1=22&y2=2021&m2=07&d2=21&stCode=005930
 cCode = '005930'
 
-con = HTTPSConnection("finance.naver.com")
-for page in range(1, 10):
-    con.request("GET", "/item/sise_day.nhn?code=%s&page=%d" % (cCode, page))
+con = HTTPSConnection("vip.mk.co.kr")
+for page in range(1, 3):
+    con.request("GET", "/newSt/price/daily.php?p_page=%d&y1=2021&m1=02&d1=22&y2=2021&m2=07&d2=21&stCode=%s" % (page, cCode))
     rb = con.getresponse().read()
-    print(rb.decode())
+    print(rb)
     # ssMarketData = BeautifulSoup(rb, "html.parser", from_encoding = "utf-8")
     # ssMarketDatas = ssMarketData.select("table.type2 tbody tr td span")
     # for m in ssMarketDatas:
