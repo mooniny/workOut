@@ -14,6 +14,7 @@ for page in range(1, 5):
     # print(rb.decode())        # utf-8
     ssNewsData = BeautifulSoup(rb, "html.parser", from_encoding = "utf-8")
     ssNewsDatas = ssNewsData.select("tbody tr")
+    # print(ssNewsDatas)
     for n in ssNewsDatas:
         # print(n.select("a")[0].attrs["href"])   # 링크
         # print(n.text.strip())   # 제목, 신문사, 날짜
@@ -22,7 +23,7 @@ for page in range(1, 5):
         link.append(n.select("a")[0].attrs["href"])
         data.append(n.text.strip())
         
-        con2 = HTTPSConnection("finance.naver.com")
+        con2 = HTTPSConnection("finance.naver.com")         # 기사 전문
         con2.request("GET", n.select("a")[0].attrs["href"])
         rb2 = con2.getresponse().read()
         # print(rb2)        # utf-8
