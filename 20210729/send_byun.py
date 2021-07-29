@@ -17,8 +17,8 @@ for page in range(1, 3):
     rb = con.getresponse().read()
     ssNewsData = BeautifulSoup(rb, "html.parser", from_encoding = "utf-8")
     ssNewsDatas = ssNewsData.select("tbody tr")
-    # print(ssNewsDatas)
     for n in ssNewsDatas:
+        # print("-------------------------------------------")
         # print(n.select("a")[0].attrs["href"])   # 링크
         link.append(n.select("a")[0].attrs["href"])
         for t in n.select(".title"):   # 제목
@@ -30,46 +30,37 @@ for page in range(1, 3):
         for d in n.select(".date"):   # 날짜
             # print(d.text)
             date.append(d.text)
-        # print("------")
-        
         
         con2 = HTTPSConnection("finance.naver.com")         # 기사 전문
         con2.request("GET", n.select("a")[0].attrs["href"])
         rb2 = con2.getresponse().read()
         ssNewsLink = BeautifulSoup(rb2, "html.parser", from_encoding = "utf-8")
+        
+        ssNewsLink = ssNewsLink.select("#news_read")
+        # ssNewsLink = ssNewsLink.select("div.scr01")
         # print(ssNewsLink)
-        ssNewsLinks = ssNewsLink.select("#news_read")
-        # print(ssNewsLinks)
-        for l in ssNewsLinks:
-            if l == None:
-                pass
-            print(l.text.replace(l.select(".end_photo_org")[0].text, "").replace(l.select(".link_news")[0].text, ""))
-            # print(l.text.replace(l.select(".end_photo_org")[0].text, "").replace(l.select(".link_news")[0].text, ""))
-            # l = l.text.replace(l.select(".link_news")[0].text, "")
-            
-            # if l == l.select(".end_photo_org") and l == l.select(".link_news"):
-                # pass
-            # else:
-                # print(l.replace(""))
-            # print(l.select(".link_news")[0].text)   
-            # print(l.text.replace(l.select(".link_news")[0].text, ""))
-            # if l.select(".end_photo_org") != None and l.select(".link_news") != None:
-                # print("")
-            # else:
-                # print(l.text.strip())
+        
+        ep = None
+        ep2 = None
+        ep3 = None
+        for l in ssNewsLink:
+            ssNews = l.text.strip()
+            if l.select("strong.media_end_summary"):
+                ep = l.select("strong.media_end_summary")[0].text
+                # ssNews = l.text.replace(ep, "")
+                ssNews = ssNews.strip(ep)
                 
-            # break
+            elif l.select("span.end_photo_org"):
+                ep2 = l.select("span.end_photo_org")[0].text
+                # ssNews = l.text.replace(ep2, "")
+                ssNews = ssNews.strip(ep2)
+                
+            elif l.select("div.link_news"):
+                ep3 = l.select("div.link_news")[0].text
+                # ssNews = l.text.replace(ep3, "")
+                ssNews = ssNews.strip(ep3)
             
-    # for txt in data:
-        # if txt != None and txt != "" and not txt.startswith("관련뉴스") and not txt.startswith('연관기사'):
-            # txt = txt.replace('/n',' ').split('\n')
-            # datas.append(txt)
-            #
-# print(link)
-# print(article)
-
-
-
-
-
-
+            print(ssNews)
+            
+            
+print(link)
